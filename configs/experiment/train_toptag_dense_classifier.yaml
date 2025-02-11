@@ -1,0 +1,40 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - override /datamodule: pc_data.yaml
+  - override /paths: default.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+datamodule:
+  data_conf:
+    dataset_type: TopTag
+    datasets:
+      c0: QCD
+      c1: ttbar
+    n_csts: 10
+    n_jets: 5_00_000
+    coordinates:
+      edge: []
+      node:
+      - del_eta
+      - del_phi
+      - log_pt
+      high:
+      - log_pt
+      - log_mass
+    incl_substruc: False
+    del_r_edges: 0
+  loader_kwargs:
+    pin_memory: true
+    batch_size: 128
+    num_workers: 4
+    drop_last: True
+
+paths:
+  data_dir: /srv/beegfs/scratch/groups/rodem/datasets/TopTagging
+
+
+project_name: supervised_toptag
+network_name: dense_toptag_test

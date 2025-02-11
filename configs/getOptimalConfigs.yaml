@@ -1,0 +1,38 @@
+# generateOptimalConfigs.yaml - Franck Rothen
+# this file is a placeholder conf (modified by snakemake)
+
+defaults:
+  - _self_
+  - taggers: sweep.yaml
+  - data_confs: default.yaml 
+  - override hydra/hydra_logging: disabled
+  - override hydra/job_logging: disabled
+
+config_path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/configs/
+method_type: "SAM"
+reference_experiment_name: train_dense_classifier_SAM
+trained_on_dataset_type: "Rodem"
+target_dataset_type: "JetNet"
+
+
+output_dir: /home/users/r/rothenf3/workspace/Jettagging/jettagging/plots
+
+files:
+  - Rodem_QCD_jj_pt_450_1200_test.h5
+  - Rodem_ttbar_allhad_pt_450_1200_test.h5
+
+roc_plots_config:
+  path: ${output_dir}
+  dataset_type: Rodem
+  taggers: ${taggers}
+  files: ${files}
+  only_to_first: T$rue
+  br_at_eff: []
+  fig_size: [7, 7]
+  ylim: [0, 1] #[1, 5.0e5]
+  do_log: False
+  divide_br: False
+  is_decor: False
+  return_AUC_and_id: True
+  # ylim: [1, 5.0e5]
+  # do_log: True

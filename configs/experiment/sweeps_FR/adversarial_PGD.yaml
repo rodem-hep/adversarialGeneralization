@@ -1,0 +1,29 @@
+# Sweep - adversarial PGD
+
+- id: 0
+  PGD_num_steps: 2
+  PGD_step_size: 0.001
+
+- id: 1
+  PGD_num_steps: 5
+  PGD_step_size: 0.002
+
+- id: 2
+  PGD_num_steps: 10
+  PGD_step_size: 0.005
+
+- id: 3
+  PGD_num_steps: 5
+  PGD_step_size: 0.01
+
+- id: 4
+  PGD_num_steps: 10
+  PGD_step_size: 0.03
+
+- id: 5
+  PGD_num_steps: 4
+  PGD_step_size: 0.006
+
+- id: 6
+  PGD_num_steps: 8
+  PGD_step_size: 0.002

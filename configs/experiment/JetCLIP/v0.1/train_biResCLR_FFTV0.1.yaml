@@ -1,0 +1,15 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - training_modes/ML_training_b256.yaml
+  - override /model: biRes_CLR.yaml
+  - override /datamodule: jiXjifft_data.yaml
+
+project_name: JetCLIP # Determines output directory path and wandb project
+network_name: biResCLR_FFTV0.1 # Used for both saving and wandb
+
+model:
+  loss_parameters:
+    logit_scale_learnable: False
+    logit_scale_init: 0.0

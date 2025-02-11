@@ -1,0 +1,20 @@
+verbose: false
+printshellcmds: true
+rerun-triggers: mtime
+jobs: 35
+
+use-singularity: true
+singularity-args: >-
+  --nv
+  --env WANDB_API_KEY=$WANDB_API_KEY
+  --env PYTHONPATH=.:libs/mltools
+  --bind /srv/beegfs/scratch:/srv/beegfs/scratch,
+  --bind /home/users/r/rothenf3/workspace/Jettagging/jettagging/wandb:/wandb,
+  --bind /home/users/r/rothenf3/workspace/Jettagging/jettagging,
+
+executor: slurm
+default-resources:
+  slurm_account: golling
+  slurm_partition: shared-cpu,private-dpnc-cpu
+  runtime: 60 # in minutes
+  mem_mb: 8000

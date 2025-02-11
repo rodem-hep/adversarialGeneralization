@@ -1,0 +1,50 @@
+entity: frothen-team
+program: train.py
+method: random
+name: SWAG_cyclic_Sweep
+project: dense_classifier_SWAG_cyclic
+run_cap: 20
+
+
+metric:
+  name: valid/swa_total_loss
+  goal: minimize
+
+parameters:
+  experiment: 
+    values: 
+      - train_dense_classifier_swag_cyclic.yaml
+
+  # max_samples_to_record: 
+  #   values: 
+  #     - 5
+  #     - 10 
+  #     - 20
+  
+  cycle_period:
+    values:
+      - 1
+      - 4
+      - 8
+      - 16
+  
+  cycle_max_lr_ratio:
+    values:
+      - 1.0
+      - 1.2
+      - 1.5
+      - 2.0
+      - 2.5
+      - 3.0
+  
+  cycle_min_lr_ratio:
+    values:
+      - 0.1
+      - 0.3
+      - 0.5
+
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args_no_hyphens}

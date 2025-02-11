@@ -1,0 +1,31 @@
+stages:
+  - lint
+  - build
+
+pre-commit:
+  stage: lint
+  image: python:3.10
+  script:
+    - pip install pre-commit
+    - pre-commit run --all-files
+
+build_latest:
+  stage: build
+  only:
+    refs:
+      - master
+    changes:
+      - docker/base.Dockerfile
+      - requirements.txt
+      - .gitlab-ci.yml
+  tags: # CERN specific
+    - docker-image-build
+  except: # Dont run daily
+    - schedules
+  script: # Needs to be defined, but is overwritten
+    - "echo"
+  variables: # CERN specific tags
+    TAG: latest
+    IMAGE_NAME: jet_tagging
+    TO: '${CI_REGISTRY}/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}/${IMAGE_NAME}:${TAG}'
+    DOCKER_FILE: docker/base.Dockerfile

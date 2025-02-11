@@ -1,0 +1,20 @@
+_target_: src.models.pc_classifiers.SimpleTransformerClassifier
+
+loss_name: bcewithlogit
+
+normaliser_config:
+  max_n: 1_000_000
+
+transformer_config:
+  dim: 64
+  num_heads: 4
+  num_layers: 3
+  ff_mult: 2
+  dropout: 0.1
+  do_final_norm: True
+
+defaults:
+  - _self_
+  - optimizer: default.yaml
+  - scheduler: warmup.yaml
+  - accuracy: default.yaml

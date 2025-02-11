@@ -1,0 +1,20 @@
+_target_: src.models.pc_classifiers.DenseClassifier
+
+loss_name: bcewithlogit
+
+use_lip_dense: false
+lipschitz_const: 1.0
+
+normaliser_config:
+  max_n: 1_000_000
+
+dense_config:
+  hddn_dim: [128, 64, 32]
+  nrm: batch
+  act_h: silu
+
+defaults:
+  - _self_
+  - optimizer: default.yaml
+  - scheduler: warmup.yaml
+  - accuracy: default.yaml

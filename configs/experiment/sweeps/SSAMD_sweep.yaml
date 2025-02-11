@@ -1,0 +1,38 @@
+entity: frothen-team
+program: train.py
+method: random
+name: SSAMD_Sweep
+project: dense_classifier_SSAMD
+run_cap: 15
+
+
+metric:
+  name: valid/total_loss
+  goal: minimize
+
+parameters:
+  experiment: 
+    values: 
+      - train_dense_classifier_SSAMD.yaml
+
+  rho: 
+    values: 
+      - 0.05
+      - 0.1
+      - 0.15 
+      - 0.2
+      - 0.3
+      - 0.5
+
+  sparsity: 
+    values: 
+      - 0.2
+      - 0.5
+      - 0.8
+      - 0.9
+  
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args_no_hyphens}

@@ -1,0 +1,25 @@
+# @package _global_
+
+defaults:
+  - hydra: default.yaml
+  - paths: default.yaml
+  - _self_
+
+get_best: true
+
+datamodule:
+  data_conf:
+    dataset_type: JetNet
+    # List of test datasets to run over
+    datasets:
+      c0: q
+      c1: t
+    
+  export_train: false
+
+adversarial_export: false
+SWA_export: false # Requires to have been trained with SWA
+SWAG_export: false # Requires to have been trained with SWA
+
+project_name: supervised
+network_name: transformer_multiclass

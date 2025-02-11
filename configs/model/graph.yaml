@@ -1,0 +1,45 @@
+_target_: src.models.pc_classifiers.GraphNetClassifier
+
+loss_name: bcewithlogit
+
+normaliser_config:
+  max_n: 1_000_000
+
+fgve_config:
+  gnn_kwargs:
+    num_blocks: 4
+    ebl_every: 0
+    start_with_ebl: False
+    gnb_kwargs:
+      do_globs: true
+      pers_edges: true
+      edge_block_kwargs:
+        msg_type: sr
+        feat_kwargs: &feat_kwargs
+          outp_dim: 32
+          hddn_dim: 128
+          num_blocks: 1
+          drp: 0.1
+          nrm: layer
+        attn_kwargs: &attn_kwargs
+          outp_dim: 8
+          hddn_dim: 128
+          num_blocks: 1
+          drp: 0.1
+          nrm: layer
+      node_block_kwargs:
+        feat_kwargs: *feat_kwargs
+        attn_kwargs: *attn_kwargs
+      glob_block_kwargs:
+        feat_kwargs: *feat_kwargs
+  dns_kwargs:
+    num_blocks: 1
+    hddn_dim: 256
+    nrm: layer
+    drp: 0.1
+
+defaults:
+  - _self_
+  - optimizer: default.yaml
+  - scheduler: warmup.yaml
+  - accuracy: default.yaml

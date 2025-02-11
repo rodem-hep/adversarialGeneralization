@@ -1,0 +1,40 @@
+# @package _global_
+
+defaults:
+  - hydra: default.yaml
+  - paths: default.yaml
+  - _self_
+
+# Parameters
+num_steps: 15
+step_size: 0.01
+
+evaluated_on_dataset_type: RS3L0 
+trained_on_dataset_type: RS3L0 
+network_type: dense
+
+datamodule:
+  data_conf:
+    dataset_type: RS3L0 
+    datasets:
+      c0: QCD
+      c1: Hbb
+  predict_n_test: 2048
+
+method_type: SAM # For export
+method_types: [SAM, SSAMD, FGSM, PGD] # For plotting
+color_list: [blue,orange,red,green]
+
+SWA_export: False
+SWAG_export: False
+
+tagger_name: "dense_RS3L0_default"
+tagger_path: "/srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/GPU/taggers/supervised_RS3L0_default"
+get_best: true
+
+output_dir: "/srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/GPU/taggers/supervised_RS3L0_default/dense_RS3L0_default/outputs"
+exp_path: "/srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/GPU"
+
+
+project_name: supervised
+network_name: dense_test

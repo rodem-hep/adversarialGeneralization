@@ -1,0 +1,30 @@
+# Sweep - SSAMF
+
+- id: 0
+  rho: 0.05
+  sparsity: 0.2
+
+- id: 1
+  rho: 0.05
+  sparsity: 0.5
+
+- id: 2
+  rho: 0.05
+  sparsity: 0.8
+
+- id: 3
+  rho: 0.03
+  sparsity: 0.2
+
+- id: 4
+  rho: 0.03
+  sparsity: 0.5
+
+- id: 5
+  rho: 0.01
+  sparsity: 0.8
+
+- id: 6
+  rho: 0.01
+  sparsity: 0.2
+  

@@ -1,0 +1,34 @@
+_target_: src.models.pc_classifiers.TransformerClassifier
+
+loss_name: bcewithlogit
+
+normaliser_config:
+  max_n: 1_000_000
+
+ftve_config:
+  node_embd_config: &densenet
+    num_blocks: 1
+    hddn_dim: 256
+    nrm: layer
+    act_h: lrlu
+    drp: 0.1
+  edge_embd_config: *densenet
+  tve_config:
+    model_dim: 128
+    num_sa_layers: 3
+    num_ca_layers: 2
+    mha_config:
+      num_heads: 16
+      drp: 0.1
+      init_zeros: True
+      do_layer_norm: True
+    dense_config:
+      <<: *densenet
+      output_init_zeros: True
+  outp_embd_config: *densenet
+
+defaults:
+  - _self_
+  - optimizer: default.yaml
+  - scheduler: warmup.yaml
+  - accuracy: default.yaml

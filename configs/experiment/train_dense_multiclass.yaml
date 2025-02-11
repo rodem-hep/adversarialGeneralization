@@ -1,0 +1,39 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - override /datamodule: pc_data.yaml
+  - override /model: dense.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+model:
+  loss_name: crossentropy
+
+datamodule:
+  data_conf:
+    n_csts: 10
+    n_jets: 500_000
+    datasets:
+      c0: QCD_jj_pt_450_1200
+      c2: ttbar_allhad_pt_450_1200
+      c3: WZ_allhad_pt_450_1200
+    coordinates:
+      edge: []
+      node:
+      - del_eta
+      - del_phi
+      - log_pt
+      high:
+      - log_pt
+      - log_mass
+    incl_substruc: True
+    del_r_edges: 0
+  loader_kwargs:
+    pin_memory: true
+    batch_size: 128
+    num_workers: 4
+    drop_last: True
+
+project_name: supervised
+network_name: dense_multiclass

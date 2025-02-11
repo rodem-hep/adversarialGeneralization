@@ -1,0 +1,19 @@
+_target_: src.models.image_classifiers.JIDoublingNetClassifier
+
+loss_name: crossentropy
+
+doublinconvnet_config:
+  inpt_size: [40, 40]
+  inpt_channels: 1
+  ctxt_dim: 0
+  min_size: 5
+  attn_below: 8
+  start_channels: 8
+  max_channels: 256
+  resnet_kwargs:
+    nrm_groups: 1
+
+defaults:
+  - _self_
+  - optimizer: default.yaml
+  - scheduler: cyclicwithwarmup.yaml

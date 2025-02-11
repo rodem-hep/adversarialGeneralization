@@ -1,0 +1,26 @@
+# Sweep - adversarial FGSM
+# Only one parameter to sweep over, the epsilon parameter of the FGSM attack
+
+- id: 0
+  epsilon: 0.0005
+
+- id: 1
+  epsilon: 0.001
+
+- id: 2
+  epsilon: 0.005
+
+- id: 3
+  epsilon: 0.007
+
+- id: 4
+  epsilon: 0.009
+
+- id: 5
+  epsilon: 0.015
+
+- id: 6
+  epsilon: 0.03
+
+- id: 7
+  epsilon: 0.1

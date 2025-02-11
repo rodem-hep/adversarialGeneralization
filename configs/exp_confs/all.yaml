@@ -1,0 +1,9 @@
+- experiment_name: default
+- experiment_name: SAM
+- experiment_name: SSAMD
+- experiment_name: FGSM
+- experiment_name: PGD
+# - experiment_name: SWA
+# - experiment_name: SWAG
+# - experiment_name: SWAcyclic
+# - experiment_name: SWAGcyclic

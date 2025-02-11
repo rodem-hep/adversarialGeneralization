@@ -1,0 +1,5 @@
+- experiment_name: default
+- experiment_name: SWA
+- experiment_name: SWAG
+# - experiment_name: SWA_cyclic
+# - experiment_name: SWAG_cyclic

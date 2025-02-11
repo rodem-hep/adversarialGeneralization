@@ -1,0 +1,21 @@
+# Sweep - SWAG
+
+- id: 0
+  max_samples_to_record: 20
+  number_epoch_before_new_record: 2
+
+- id: 1
+  max_samples_to_record: 5
+  number_epoch_before_new_record: 5
+
+- id: 2
+  max_samples_to_record: 10
+  number_epoch_before_new_record: 3
+
+- id: 3
+  max_samples_to_record: 15
+  number_epoch_before_new_record: 4
+
+- id: 4
+  max_samples_to_record: 25
+  number_epoch_before_new_record: 1

@@ -1,0 +1,8 @@
+# generateSweepConfigs.yaml - Franck Rothen
+# this file is a placeholder conf for the hydra config generation script (modified by snakemake)
+
+exp_path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/experiments/
+config_path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/configs/
+method_type: "SAM"
+reference_experiment_name: train_dense_classifier_SAM
+trained_on_dataset_type: "Rodem"

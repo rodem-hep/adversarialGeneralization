@@ -1,0 +1,34 @@
+entity: frothen-team
+program: train.py
+method: random
+name: SWAG_Sweep
+project: dense_classifier_SWAG
+run_cap: 10
+
+
+metric:
+  name: valid/swa_total_loss
+  goal: minimize
+
+parameters:
+  experiment: 
+    values: 
+      - train_dense_classifier_swag.yaml
+
+  max_samples_to_record: 
+    values: 
+      - 5
+      - 10 
+      - 20
+  number_epoch_before_new_record: 
+    values: 
+      - 2
+      - 4
+      - 6
+
+  
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args_no_hyphens}

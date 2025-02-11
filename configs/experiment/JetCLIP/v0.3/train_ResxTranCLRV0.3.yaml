@@ -1,0 +1,17 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - training_modes/L_training_b256.yaml
+  - override /model: ResxTranCLR.yaml
+  - override /datamodule: jiXpc_data.yaml
+
+project_name: JetCLIP # Determines output directory path and wandb project
+network_name: ResxTranCLR256V0.3 # Used for both saving and wandb
+
+model:
+  optimizer:
+    _target_: torch.optim.AdamW
+    _partial_: true
+    lr: 1.0e-4
+    weight_decay: 1.0e-6

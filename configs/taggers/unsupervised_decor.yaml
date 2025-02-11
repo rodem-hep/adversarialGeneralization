@@ -1,0 +1,50 @@
+
+# tagger_dir: &tagger_dir "/home/users/r/rothenf3/workspace/Jettagging/jettagging/jobs/taggers"
+
+- name: dense_test
+  path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/jobs/taggers/supervised
+  score_name: ext_decor_output
+  label: dense trained on Rodem
+  plot_kwargs:
+    linestyle: solid
+    color: black
+
+- name: dense_jetnet_test
+  path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/jobs/taggers/supervised_jetnet
+  score_name: ext_decor_output
+  label: dense trained on Jetnet
+  plot_kwargs:
+    linestyle: solid
+    color: blue
+
+- name: dense_test_adversarial_FGSM
+  path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/jobs/taggers/supervised_adversarial_FGSM
+  label: dense Adversarial FGSM
+  score_name: ext_decor_output
+  plot_kwargs:
+    linestyle: solid
+    color: red
+
+# - name: dense_jetnet_test_RP
+#   path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/jobs/taggers/supervised_jetnet_RP
+#   label: dense unsupervised RP
+#   score_name: output
+#   plot_kwargs:
+#     linestyle: solid
+#     color: green
+
+# - name: dense_jetnet_test_JP
+#   path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/jobs/taggers/supervised_jetnet_JP
+#   label: dense unsupervised JP
+#   score_name: output
+#   plot_kwargs:
+#     linestyle: solid
+#     color: orange
+
+# - name: dense_jetnet_test_FGSMRP
+#   path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/jobs/taggers/supervised_jetnet_FGSMRP
+#   label: dense unsupervised FGSMRP
+#   score_name: output
+#   plot_kwargs:
+#     linestyle: solid
+#     color: brown

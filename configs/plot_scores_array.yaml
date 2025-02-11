@@ -1,0 +1,11 @@
+config_path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/configs
+exp_path: /srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/RS3LYM4
+exp_name: RS3LYM4
+
+network_type: dense
+method_file_name: all
+
+plotReferenceScores: False
+plotScores: False
+plotRatioHeatmap: False
+

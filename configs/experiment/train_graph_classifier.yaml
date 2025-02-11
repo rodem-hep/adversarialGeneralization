@@ -1,0 +1,43 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - override /datamodule: pc_data.yaml
+  - override /model: graph.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+datamodule:
+  data_conf:
+    n_jets: 2_000_000
+    n_csts: 64
+    datasets:
+      c0: QCD_jj_pt_450_1200
+      c1: ttbar_allhad_pt_450_1200
+    coordinates:
+      edge:
+      - del_R
+      - log_kt
+      - z
+      - log_m
+      - psi
+      node:
+      - del_eta
+      - del_phi
+      - log_pt
+      - log_pt_frac
+      - log_eng
+      - log_eng_frac
+      - del_R
+      high:
+      - log_pt
+      - log_mass
+    del_r_edges: 9999
+  loader_kwargs:
+    pin_memory: true
+    batch_size: 64
+    num_workers: 16
+    drop_last: True
+
+project_name: supervised
+network_name: graph_test

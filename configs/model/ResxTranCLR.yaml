@@ -1,0 +1,37 @@
+_target_: src.models.contrastive.JIxPCResnetCLR
+
+loss_name: CLIP_norm
+
+emb_dim: 32
+
+jinet_config:
+  inpt_channels: 1
+  ctxt_dim: 0
+  min_size: 5
+  attn_below: 8
+  start_channels: 8
+  max_channels: 256
+  resnet_kwargs:
+    nrm_groups: 1
+
+pcnet_config:
+  node_embd_config: &densenet
+    num_blocks: 1
+    hddn_dim: 256
+    nrm: layer
+    act_h: silu
+    drp: 0.1
+  edge_embd_config: *densenet
+  tve_config:
+    model_dim: 128
+    num_sa_layers: 2
+    num_ca_layers: 2
+    mha_config:
+      num_heads: 16
+    dense_config: *densenet
+  outp_embd_config: *densenet
+
+defaults:
+  - _self_
+  - optimizer: fast.yaml
+  - scheduler: cyclicwithwarmup.yaml

@@ -1,0 +1,21 @@
+_target_: src.models.contrastive.ImagexImageCLR
+
+loss_name: CLIP_norm
+
+image_dim: [40, 40]
+emb_size: 32
+
+convnet_config:
+  - default_activation: ""
+  - default_kernel: 3
+  - default_padding: "same"
+  - conv_layers:
+    - {"type": "conv"}
+    - {"type": "conv"}
+    - {"type": "conv"}
+  - dense_layers: []
+
+defaults:
+  - _self_
+  - optimizer: fast.yaml
+  - scheduler: cyclicwithwarmup.yaml

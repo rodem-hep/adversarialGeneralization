@@ -1,0 +1,25 @@
+_target_: src.datamodules.iterable_lightning.PointCloudDataModule
+data_conf:
+  path: Null
+  datasets: 
+    c0: QCD_jj_pt_450_1200
+    c1: ttbar_allhad_pt_450_1200
+  iterator:
+    _target_: src.datamodules.loading.JetClassIterator
+    _partial_: True
+    n_load: 2
+  n_steps: 100_000_000
+  n_csts: 64
+  coordinates:
+    edge: []
+    node:
+    - del_eta
+    - del_phi
+    - log_pt
+    high: []
+  del_r_edges: 0
+loader_kwargs:
+  pin_memory: true
+  batch_size: 128
+  num_workers: 12
+  drop_last: True

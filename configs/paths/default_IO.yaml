@@ -1,0 +1,7 @@
+# output dir will be created by hydra
+data_dir: /srv/beegfs/scratch/groups/rodem/anomalous_jets/virtual_data
+output_dir: /home/users/o/oleksiyu/JetTaggers/saved_models/
+
+# Interpolated
+root_dir: ${oc.env:PROJECT_ROOT}
+full_path: ${paths.output_dir}/${project_name}/${network_name}/

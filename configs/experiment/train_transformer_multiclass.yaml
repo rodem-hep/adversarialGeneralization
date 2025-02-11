@@ -1,0 +1,53 @@
+# @package _global_
+
+defaults:
+  - override /datamodule: pc_data.yaml
+  - override /model: transformer.yaml
+  - override /model/optimizer: default.yaml
+  - override /trainer: default.yaml
+
+datamodule:
+  data_conf:
+    n_jets: 850_000
+    n_csts: 64
+    datasets:
+      c0: QCD_jj_pt_450_1200
+      c1: ttbar_allhad_pt_450_1200
+      c2: WZ_allhad_pt_450_1200
+    coordinates:
+      edge:
+      - del_R
+      - log_kt
+      - z
+      - log_m
+      - psi
+      node:
+      - del_eta
+      - del_phi
+      - log_pt
+      - log_pt_frac
+      - log_eng
+      - log_eng_frac
+      - del_R
+      high:
+      - log_pt
+      - log_mass
+    del_r_edges: 9999
+  loader_kwargs:
+    pin_memory: true
+    batch_size: 128
+    num_workers: 16
+    drop_last: True
+
+trainer:
+  precision: 16
+
+model:
+  loss_name:
+    _target_: torch.nn.CrossEntropyLoss
+    _partial_: True
+    label_smoothing: 0.1
+    reduction: none
+
+project_name: supervised
+network_name: transformer_multiclass_lion

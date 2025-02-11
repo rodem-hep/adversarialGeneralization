@@ -1,0 +1,34 @@
+_target_: src.datamodules.JImodule.JIDataModule
+
+val_frac: 0.1
+data_conf:
+  path: ${paths.data_dir}
+  datasets:
+    c0: QCD_jj_pt_450_1200
+    c1: ttbar_allhad_pt_450_1200
+  n_jets: 2_000_000
+  n_csts: 100
+  image_params:
+    bins: 40
+    phi_bounds: [-1, 1]
+    eta_bounds: [-1, 1]
+    do_naive_const_preprocessing: 1
+    image_transform:
+      - "pixel_pow 0.5"
+      - "sum_1_norm"
+      - "gaussian_smearing 1"
+      - "scale 100"
+  min_n_csts: 1
+  leading: True
+  recalculate_jet_from_pc: False
+  incl_substruc: False
+  boost_mopt: 0
+  augmentation_list: none
+  augmentation_prob: 0
+  do_plots: True
+
+loader_kwargs:
+  pin_memory: true
+  batch_size: 256
+  num_workers: 24
+  drop_last: True

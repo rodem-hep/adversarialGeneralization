@@ -1,0 +1,36 @@
+# Reference taggers
+
+- name: dense_Rodem
+  path: /srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/taggers/supervised_Rodem_default
+  score_name: ext_decor_output
+  label: dense trained on Rodem
+  plot_kwargs:
+    linestyle: solid
+    color: black
+
+- name: dense_JetNet
+  path: /srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/taggers/supervised_JetNet_default
+  score_name: ext_decor_output
+  label: dense trained on JetNet
+  plot_kwargs:
+    linestyle: solid
+    color: blue
+
+
+# Taggers to compare
+
+- name: dense_Rodem_SAM
+  path: /srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/taggers/supervised_Rodem_SAM
+  label: dense SAM trained on Rodem
+  score_name: ext_decor_output
+  plot_kwargs:
+    linestyle: solid
+    color: green
+
+- name: dense_Rodem_adversarial_FGSM
+  path: /srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/taggers/supervised_Rodem_adversarial_FGSM
+  label: dense Adversarial FGSM trained on Rodem
+  score_name: ext_decor_output
+  plot_kwargs:
+    linestyle: solid
+    color: red

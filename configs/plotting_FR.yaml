@@ -1,0 +1,29 @@
+defaults:
+  - _self_
+  # - taggers: all.yaml
+  - taggers: unsupervised_decor.yaml
+
+output_dir: /home/users/r/rothenf3/workspace/Jettagging/jettagging/plots
+config_path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/configs/
+
+files: #The first is considered background
+  - QCD
+  - Hbb
+
+dataset_type: RS3L0
+dset: test
+
+trained_on_dataset_type: RS3L0
+
+single_tagger: True,
+tagger_name: "dense_Rodem_SAM"
+tagger_path: /srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/main_without_mass/taggers/supervised_Rodem_SAM
+tagger_label: "dense SAM trained on Rodem"
+
+
+plot_score_distribution: False
+plot_mass_distribution: False
+plot_mass_distribution_quantiles: False
+plot_mass_morphing: False
+
+quantileslist: [0, 0.2, 0.5, 0.8, 0.95]

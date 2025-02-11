@@ -1,0 +1,21 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - training_modes/long_training_b256.yaml
+  - override /model: doublin_class.yaml
+  - override /datamodule: ji_data_simple.yaml
+
+project_name: supervised_tagging # Determines output directory path and wandb project
+network_name: JIResnet_classifierV0.2 # Used for both saving and wandb
+
+model:
+  optimizer:
+    _target_: torch.optim.AdamW
+    _partial_: true
+    lr: 1.0e-4
+    weight_decay: 1.0e-5
+
+datamodule:
+  data_conf:
+    n_jets: 8_000_000

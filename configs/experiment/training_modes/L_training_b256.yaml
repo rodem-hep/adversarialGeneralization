@@ -1,0 +1,13 @@
+# @package _global_
+trainer:
+  min_epochs: 1
+  max_epochs: 200
+
+datamodule:
+  data_conf:
+    n_jets: -1
+  loader_kwargs:
+    batch_size: 256
+
+defaults:
+  - override /model/optimizer: fast.yaml

@@ -1,0 +1,66 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - override /datamodule: pc_data.yaml
+  - override /model: simpleTransformer.yaml
+  - override /model/optimizer: default.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+datamodule:
+  data_conf:
+    dataset_type: RS3L0
+    datasets:
+      c0: QCD
+      c1: Hbb
+    n_csts: 40
+    n_jets: 5_00_000
+    coordinates:
+      edge: []
+      node:
+      - pt # This is already log_pt
+      - relpt
+      - del_eta
+      - del_phi
+      - dr
+      - log_energy
+      - relenergy
+      - charge
+      # - pdgid
+      - isPhoton
+      - isElectron
+      - isMuon
+      - isChargedHadron
+      - isNeutralHadron
+      - tanhd0
+      - tanhdz
+      high:
+      - log_pt
+      # - log_mass # Will be dynamically added by snakemake
+    incl_substruc: False
+    del_r_edges: 0
+  loader_kwargs:
+    pin_memory: true
+    batch_size: 128
+    num_workers: 4
+    drop_last: True
+
+use_adversarial_samples: true
+attack_type: PGD # (FGSM or PGD)
+epsilon: 0.007
+PGD_num_steps: 5
+PGD_step_size: 0.01
+
+adversarial_scheduler_config:
+  min_frac: 0
+  max_frac: 0.8
+  min_steps: 3
+  n_warmup_steps: 5
+
+model:
+  optimizer:
+    lr: 0.5e-4
+
+project_name: supervised_PGD
+network_name: dense_test_PGD

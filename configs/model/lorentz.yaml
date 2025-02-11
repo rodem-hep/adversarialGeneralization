@@ -1,0 +1,25 @@
+_target_: src.models.pc_classifiers.LorentzClassifier
+
+loss_name: bcewithlogit
+
+use_sharpness_aware_minimization: false
+use_adversarial_samples: false
+adversarial_fraction: 0
+adversarial_epsilon: 0.007
+
+use_lip_dense: false
+lipschitz_const: 1.0
+
+normaliser_config:
+  max_n: 1_000_000
+
+lorentz_config:
+  n_hidden: 72
+  #nrm: batch
+  #act_h: silu
+
+defaults:
+  - _self_
+  - optimizer: default.yaml
+  - scheduler: warmup.yaml
+  - accuracy: default.yaml

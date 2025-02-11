@@ -1,0 +1,25 @@
+# Reference taggers
+
+- name: dense_Rodem_default
+  path: /srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/main_with_mass/taggers/supervised_Rodem_default
+  score_name: output
+  label: dense default trained on Rodem
+  plot_kwargs:
+    linestyle: solid
+    color: black
+
+- name: dense_TopTag_default
+  path: /srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/main_with_mass/taggers/supervised_TopTag_default
+  score_name: output
+  label: dense default trained on TopTag
+  plot_kwargs:
+    linestyle: solid
+    color: blue
+
+- name: dense_JetNet_default
+  path: /srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/main_with_mass/taggers/supervised_JetNet_default
+  score_name: output
+  label: dense default trained on JetNet
+  plot_kwargs:
+    linestyle: solid
+    color: red

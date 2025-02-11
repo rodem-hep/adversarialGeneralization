@@ -1,0 +1,33 @@
+# @package _global_
+
+defaults:
+  - hydra: default.yaml
+  - paths: default.yaml
+  - _self_
+
+# Parameters
+evaluated_on_dataset_type: RS3L0  
+trained_on_dataset_type: RS3L0  
+
+datamodule:
+  data_conf:
+    dataset_type: RS3L0
+    datasets:
+      c0: QCD
+      c1: Hbb
+  predict_n_test: 2048
+
+tagger_name: "dense_RS3L0_default"
+tagger_path: "/srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/GPU/taggers/supervised_RS3L0_default"
+get_best: true
+
+SWA_export: false # Requires to have been trained with SWA
+SWAG_export: false # Requires to have been trained with SWA
+
+max_iter: 1000 # How many samples to evaluate Hessian
+n_const: 5 
+
+output_dir: "/srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/GPU/plots/methods/default/hessian/"
+
+project_name: WhatIsMyPurpose
+network_name: WhatIsMyPurpose

@@ -1,0 +1,47 @@
+_target_: src.models.autoencoders.TransformerVAE
+
+lat_dim: 16
+loss_name: champfer
+kld_weight: 1.0e-1
+kld_warmup_steps: 50_000
+reg_loss_name: huber
+reg_loss_weight: 1.0e-4
+reg_loss_warmup_steps: 50_000
+
+normaliser_config:
+  max_n: 1_000_000
+
+encoder_config:
+  node_embd_config: &densenet
+    num_blocks: 1
+    hddn_dim: 128
+    nrm: layer
+    act_h: lrlu
+  edge_embd_config: *densenet
+  tve_config:
+    model_dim: &dim 64
+    num_sa_layers: &n_layers 3
+    num_ca_layers: 2
+    mha_config: &mha
+      num_heads: 16
+      drp: 0.1
+      init_zeros: True
+      do_layer_norm: True
+    dense_config: &zeronet
+      <<: *densenet
+      output_init_zeros: True
+  outp_embd_config: *densenet
+
+decoder_config:
+  vect_embd_config: *densenet
+  tvd_config:
+    model_dim: *dim
+    num_layers: *n_layers
+    mha_config: *mha
+    dense_config: *zeronet
+  outp_embd_config: *densenet
+
+defaults:
+  - _self_
+  - optimizer: default.yaml
+  - scheduler: warmup.yaml

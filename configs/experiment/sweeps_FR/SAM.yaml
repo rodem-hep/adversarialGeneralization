@@ -1,0 +1,26 @@
+# Sweep - SAM
+# Only one parameter to sweep over, the rho parameter of the SAM method
+
+- id: 0
+  rho: 0.005
+
+- id: 1
+  rho: 0.01
+
+- id: 2
+  rho: 0.05
+
+- id: 3
+  rho: 0.1
+
+- id: 4
+  rho: 0.3
+
+- id: 5
+  rho: 0.5
+
+- id: 6
+  rho: 0.7
+
+- id: 7
+  rho: 1.0

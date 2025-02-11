@@ -1,0 +1,23 @@
+# Directories
+__pycache__
+data/
+logs/
+outputs/
+plots/
+.vscode/
+container/
+slurmscripts/
+user**/**
+*wandb*
+**user**
+*.pytest
+**/user**
+snakemake/template/common/private.yaml
+# File types
+.mypy*
+*.pyc
+*.out
+*.sh
+*.log
+*.key
+*workspace

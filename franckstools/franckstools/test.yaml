@@ -1,0 +1,7 @@
+defaults:
+  - _self_
+  # - hydra: default
+  - ../../snakemake/template/common: private # create your own and never push! look at default for reference
+
+io:
+  output_path: plots

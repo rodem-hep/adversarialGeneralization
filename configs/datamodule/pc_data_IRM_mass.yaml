@@ -1,0 +1,44 @@
+_target_: src.datamodules.IRM_mass_module.PointCloudDataModule
+
+val_frac: 0.02 #0.1 # divided by 5 for IRM_mass (5 times as much data)
+data_conf:
+  dataset_type: Rodem
+  datasets:
+    c0: QCD_jj_pt_450_1200
+    c1: ttbar_allhad_pt_450_1200
+  n_jets: 2_000_000
+  n_csts: 64
+  coordinates:
+    edge:
+    - del_R
+    - log_kt
+    - z
+    - log_m
+    - psi
+    - dot_prod
+    node:
+    - del_eta
+    - del_phi
+    - log_pt
+    high:
+    - log_pt
+    - log_mass
+  min_n_csts: 1
+  leading: True
+  recalculate_jet_from_pc: False
+  incl_substruc: False
+  del_r_edges: 9999
+  boost_mopt: 0
+  augmentation_list: none
+  augmentation_prob: 0
+
+loader_kwargs:
+  pin_memory: true
+  batch_size: 512
+  num_workers: 12
+  drop_last: True
+
+n_environments: 3
+mus_list: [[100, 160], [90, 170]]
+sigmas_list: [[50, 30], [40, 25]]
+add_original_dist: True # Do not forget to change n_environments to n+1

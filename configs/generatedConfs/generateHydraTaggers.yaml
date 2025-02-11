@@ -1,0 +1,23 @@
+# generateHydraTaggers.yaml - Franck Rothen
+# this file is a placeholder conf for the hydra taggers generation script (modified by snakemake)
+
+
+generateReferenceTaggerList: false
+generateTaggerListForMethod: false
+
+trainedORevaluatedOn: trained_on
+
+network_type: dense
+config_path: Null
+exp_path: Null
+experiment_name: Null
+output_dir: Null
+method_type: Null
+target_dataset_type: Null
+
+
+# config_path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/configs/
+# output_dir: "/srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/plots/methods/SAM"
+# method_type: "SAM"
+# target_dataset_type: "Rodem"
+

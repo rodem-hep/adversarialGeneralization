@@ -1,0 +1,20 @@
+_target_: src.models.contrastive.ImagexImageResnetCLR
+
+loss_name: CLIP_norm
+
+doublinconvnet_config:
+  inpt_size: [40, 40]
+  inpt_channels: 1
+  outp_dim: 32 #the embedding size
+  ctxt_dim: 0
+  min_size: 5
+  attn_below: 8
+  start_channels: 8
+  max_channels: 256
+  resnet_kwargs:
+    nrm_groups: 1
+
+defaults:
+  - _self_
+  - optimizer: fast.yaml
+  - scheduler: cyclicwithwarmup.yaml

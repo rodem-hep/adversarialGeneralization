@@ -1,0 +1,26 @@
+# Sweep - SWAG_cyclic
+
+- id: 0
+  cycle_period: 1
+  cycle_max_lr_ratio: 1.0
+  cycle_min_lr_ratio: 0.1
+
+- id: 1
+  cycle_period: 4
+  cycle_max_lr_ratio: 1.0
+  cycle_min_lr_ratio: 0.1
+
+- id: 2
+  cycle_period: 8
+  cycle_max_lr_ratio: 1.0
+  cycle_min_lr_ratio: 0.2
+
+- id: 3
+  cycle_period: 4
+  cycle_max_lr_ratio: 1.2
+  cycle_min_lr_ratio: 0.3
+
+- id: 4
+  cycle_period: 8
+  cycle_max_lr_ratio: 1.5
+  cycle_min_lr_ratio: 0.5

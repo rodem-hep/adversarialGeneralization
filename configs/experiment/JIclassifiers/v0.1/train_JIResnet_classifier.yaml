@@ -1,0 +1,10 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - training_modes/long_training_b256.yaml
+  - override /model: doublin_class.yaml
+  - override /datamodule: ji_data.yaml
+
+project_name: supervised_tagging # Determines output directory path and wandb project
+network_name: JIResnet_classifier # Used for both saving and wandb

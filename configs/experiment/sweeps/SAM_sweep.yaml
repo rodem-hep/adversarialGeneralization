@@ -1,0 +1,31 @@
+entity: frothen-team
+program: train.py
+method: grid
+name: SAM_Sweep
+project: dense_classifier_sam
+run_cap: 6
+
+
+metric:
+  name: valid/total_loss
+  goal: minimize
+
+parameters:
+  experiment: 
+    values: 
+      - train_dense_classifier_sam.yaml
+
+  rho: 
+    values: 
+      - 0.05
+      - 0.1
+      - 0.15 
+      - 0.2
+      - 0.3
+      - 0.5
+  
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args_no_hyphens}

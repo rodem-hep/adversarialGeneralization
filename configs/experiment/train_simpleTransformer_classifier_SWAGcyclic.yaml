@@ -1,0 +1,76 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - override /datamodule: pc_data.yaml
+  - override /model: simpleTransformer.yaml
+  - override /model/scheduler: swag_warmup.yaml
+  - override /model/optimizer: SWAG_SGD.yaml # SWAG should be used with SGD (AdamW might work but the paper uses SGD)
+ 
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+datamodule:
+  data_conf:
+    dataset_type: RS3L0
+    datasets:
+      c0: QCD
+      c1: Hbb
+    n_csts: 40
+    n_jets: 5_00_000
+    coordinates:
+      edge: []
+      node:
+      - pt # This is already log_pt
+      - relpt
+      - del_eta
+      - del_phi
+      - dr
+      - log_energy
+      - relenergy
+      - charge
+      # - pdgid
+      - isPhoton
+      - isElectron
+      - isMuon
+      - isChargedHadron
+      - isNeutralHadron
+      - tanhd0
+      - tanhdz
+      high:
+      - log_pt
+      # - log_mass # Will be dynamically added by snakemake
+    incl_substruc: False
+    del_r_edges: 0
+  loader_kwargs:
+    pin_memory: true
+    batch_size: 128
+    num_workers: 4
+    drop_last: True
+
+
+use_SWAG: True
+max_samples_to_record: 20
+number_epoch_before_new_record: 1
+scale: 0.5
+transfer_ckpt_path : /srv/beegfs/scratch/users/r/rothenf3/projects/MasterFranck/experiments/initial_testing/main40_without_mass/taggers/supervised_Rodem_default/dense_Rodem_default/checkpoints/best_110.ckpt # Set to none to train entirely
+isRecordCyclic: True
+cycle_period: 4
+cycle_min_lr_ratio: 0.1
+cycle_max_lr_ratio: 3.0
+
+callbacks:
+
+  model_checkpoint:
+    # _target_: franckstools.franckstools.swag.ModelCheckpointSWAG
+    monitor: valid/swa_total_loss
+  
+
+  
+  early_stopping:
+    _target_: franckstools.franckstools.swag.EarlyStoppingSWAG
+    monitor: valid/swa_total_loss
+    patience: 50
+    n_extra_epochs: 75
+
+project_name: supervised_SWAGcyclic
+network_name: dense_test_SWAGcyclic #_${now:%Y-%m-%d-%H-%M-%S-%f}

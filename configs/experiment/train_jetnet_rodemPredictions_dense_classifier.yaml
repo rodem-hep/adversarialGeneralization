@@ -1,0 +1,42 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - override /datamodule: pc_data.yaml
+  - override /paths: default.yaml
+
+# all parameters below will be merged with parameters from default configurations set above
+# this allows you to overwrite only specified parameters
+datamodule:
+  data_conf:
+    rodem_predictions_path: /home/users/r/rothenf3/workspace/Jettagging/jettagging/jobs/taggers/supervised/dense_test/outputs
+    score_name: ext_decor_output
+    dataset_type: JetNet
+    datasets:
+      c0: q
+      c1: t
+    n_csts: 10
+    n_jets: 5_00_000
+    coordinates:
+      edge: []
+      node:
+      - del_eta
+      - del_phi
+      - log_pt
+      high:
+      - log_pt
+      - log_mass
+    incl_substruc: False
+    del_r_edges: 0
+  loader_kwargs:
+    pin_memory: true
+    batch_size: 128
+    num_workers: 4
+    drop_last: True
+
+paths:
+  data_dir: /srv/beegfs/scratch/groups/rodem/datasets/jetnet
+
+
+project_name: supervised_jetnet_RP
+network_name: dense_jetnet_test_RP

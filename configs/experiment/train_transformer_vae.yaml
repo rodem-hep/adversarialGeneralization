@@ -1,0 +1,41 @@
+# @package _global_
+
+defaults:
+  - override /model: transformer_vae.yaml
+  - override /datamodule: pc_data.yaml
+
+# Only train the vae on qcd
+datamodule:
+  data_conf:
+    datasets:
+      c0: QCD_jj_pt_450_1200
+    coordinates:
+      edge:
+      - del_R
+      - log_kt
+      - z
+      - log_m
+      - psi
+      node:
+      - del_eta
+      - del_phi
+      - log_squash_pt
+      high:
+      - pt
+      - mass
+    del_r_edges: 9999
+    n_jets: 2_000_000
+    n_csts: 64
+  loader_kwargs:
+    pin_memory: true
+    batch_size: 256
+    num_workers: 16
+    drop_last: True
+
+trainer:
+  precision: 32
+precision: null
+compile: null
+
+project_name: unsupervised
+network_name: trans_vae_${now:%Y-%m-%d}_${now:%H-%M-%S-%f}

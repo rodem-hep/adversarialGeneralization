@@ -1,0 +1,57 @@
+defaults:
+  - _self_
+  - taggers: all.yaml
+  - override hydra/hydra_logging: none
+  - override hydra/job_logging: none
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+
+decorrelate_single_tagger: false
+tagger_name: Null
+tagger_path: Null
+tagger_score_name: Null
+
+plot_OT: true
+output_dir: /home/users/r/rothenf3/workspace/Jettagging/jettagging/plots
+
+# decor_file: QCD_jj_pt_450_1200_decor
+# decor_type: Rodem
+# decor_dset: test
+# dataset_type: JetNet
+# dset: train
+
+# decor_file: t
+# decor_type: JetNet
+# decor_dset: train
+# dataset_type: JetNet
+# dset: train
+
+decor_type: Rodem
+decor_dset: test
+dataset_type: JetNet
+dset: test
+
+
+
+min_bw: 2
+min_per_bin: 300
+max_value: 500
+
+decor_files:
+  - QCD_jj_pt_450_1200
+  - ttbar_allhad_pt_450_1200
+  # - q
+  # - t
+
+
+files: # The first is considered background
+  # - QCD_jj_pt_450_1200
+  # - ttbar_allhad_pt_450_1200
+ 
+  - q
+  - t
+
+# background: q

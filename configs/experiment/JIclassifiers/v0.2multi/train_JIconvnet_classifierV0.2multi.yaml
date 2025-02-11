@@ -1,0 +1,25 @@
+# @package _global_
+
+# Order indicates overwriting
+defaults:
+  - training_modes/long_training_b256.yaml
+  - override /model: conv_class.yaml
+  - override /datamodule: ji_data_simple.yaml
+
+project_name: supervised_tagging # Determines output directory path and wandb project
+network_name: JIconvnet_classifierV0.2multi # Used for both saving and wandb
+
+model:
+  optimizer:
+    _target_: torch.optim.AdamW
+    _partial_: true
+    lr: 1.0e-4
+    weight_decay: 1.0e-5
+
+datamodule:
+  data_conf:
+    n_jets: 850_000
+    datasets:
+      c0: QCD_jj_pt_450_1200
+      c1: ttbar_allhad_pt_450_1200
+      c2: WZ_allhad_pt_450_1200

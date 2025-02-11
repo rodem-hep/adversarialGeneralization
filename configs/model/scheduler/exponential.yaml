@@ -1,0 +1,7 @@
+  mattstools:
+    name: "lr_sheduler.ExponentialLR"
+    gamma: 0.98
+  lightning:
+    monitor: valid/total_loss
+    interval: epoch
+    frequency: 1
