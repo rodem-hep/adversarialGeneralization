@@ -80,7 +80,7 @@ def main(cfg: DictConfig) -> None:
         )
 
     plt.legend()
-    plt.xlabel("steps")
+    plt.xlabel("Steps")
     plt.ylabel("Zero-shifted Loss")
     # plt.grid(True)
 
@@ -89,7 +89,7 @@ def main(cfg: DictConfig) -> None:
     )
     plt.close()
 
-    # Plot INPUT tracing
+    # Plot FEATURE tracing
     for i, tagger in enumerate(taggers):
         log.info(f"{tagger['label']}")
 
@@ -124,7 +124,7 @@ def main(cfg: DictConfig) -> None:
         )
 
     plt.legend()
-    plt.xlabel("steps")
+    plt.xlabel("Steps")
     plt.ylabel("Zero-shifted Loss")
     # plt.grid(True)
 

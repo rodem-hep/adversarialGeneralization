@@ -71,3 +71,6 @@ This repository contains the code necessary to reproduce the results described i
 
 4) `franckstools/adversarial_attack.py`
     - Contains a wrapper including all the logic to train a pytorch lightning model using the different adversarial methods. (Feature-space)
+
+5) `scripts/export_hessian.py`
+    - Calculates the largest eigenvalue of the hessian for the models.
