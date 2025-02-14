@@ -1,0 +1,14 @@
+# @package _global_
+
+defaults:
+  - hydra: default.yaml
+  - paths: default.yaml
+  - _self_
+
+# Parameters
+output_dir: Null
+evaluated_on_dataset_type: Null
+trained_on_dataset_type: Null
+
+project_name: WhatIsMyPurpose
+network_name: WhatIsMyPurpose

@@ -4,17 +4,17 @@
     c1: Hbb
   color: blue
 
-- dataset_type: RS3L2 # 1/sqrt(2)
-  datasets:
-    c0: QCD
-    c1: Hbb
-  color: red
-
-- dataset_type: RS3L3 # sqrt(2)
-  datasets:
-    c0: QCD
-    c1: Hbb
-  color: green
+# - dataset_type: RS3L2 # 1/sqrt(2)
+#   datasets:
+#     c0: QCD
+#     c1: Hbb
+#   color: red
+#
+# - dataset_type: RS3L3 # sqrt(2)
+#   datasets:
+#     c0: QCD
+#     c1: Hbb
+#   color: green
 
 - dataset_type: RS3L4 # Herwig7
   datasets:

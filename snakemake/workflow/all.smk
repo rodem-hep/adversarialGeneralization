@@ -48,7 +48,7 @@ with open(f"{config_path}/exp_confs/adversarial.yaml", 'r') as file:
 # method_types = [method['experiment_name'] for method in exp_config if method['experiment_name'] != 'default']
 method_types = [method['experiment_name'] for method in exp_config]
 
-network_types = ["dense", "simpleTransformer"]
+network_types = ["dense"]#, "simpleTransformer"]
 method_file_names = ["all", "adversarial"], #"SWAG"]
 
 
@@ -88,8 +88,7 @@ rule all:
         *[f"{exp_path}/{network_type}/plots/avgLossLandscape_TR_{trained_on_dataset_type}_EV_{evaluated_on_dataset_type}.pdf" for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types if evaluated_on_dataset_type==trained_on_dataset_type for network_type in network_types], # Only plot the diagonal for now
 
         # Hessian analysis
-        # *[f"{exp_path}/{network_type}/hessianAnalysis/{method_type}/TR_{trained_on_dataset_type}/EV_{evaluated_on_dataset_type}/{dataset}_hessian_largest_eigenvalue_input.txt" for network_type in network_types for method_type in method_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types for dataset in ["QCD", "Hbb"]],
-        # *[f"{exp_path}/{network_type}/hessianAnalysis/{method_type}/TR_{trained_on_dataset_type}/EV_{evaluated_on_dataset_type}/{dataset}_hessian_largest_eigenvalue_weight.txt" for network_type in network_types for method_type in method_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types for dataset in ["QCD", "Hbb"]],
+        *[f"{exp_path}/{network_type}/hessianAnalysis/TR_{trained_on_dataset_type}_EV_{evaluated_on_dataset_type}_hessian_eigenvalues.txt" for network_type in network_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types],
 
         # # Reference scores summary table
         # *[f"{exp_path}/{network_type}/scores_array/reference_rejection_heatmap.png" for network_type in network_types],

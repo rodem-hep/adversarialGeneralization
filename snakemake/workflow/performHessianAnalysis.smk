@@ -13,6 +13,27 @@ config_path = os.path.join(config["config_path"])
 # Import other snakemake files
 include: "train.smk"
 
+rule generateLatexTable:
+    output:
+      f"{exp_path}/{{network_type}}/hessianAnalysis/TR_{{trained_on_dataset_type}}_EV_{{evaluated_on_dataset_type}}_hessian_eigenvalues.txt",
+
+    params: 
+      "scripts/generate_hessian_latex_table.py",
+      f"output_dir={exp_path}/{{network_type}}/hessianAnalysis",
+      "evaluated_on_dataset_type={evaluated_on_dataset_type}",
+      "trained_on_dataset_type={trained_on_dataset_type}",
+
+    resources:
+        runtime = 15,
+
+    input:
+        *[f"{exp_path}/{{network_type}}/hessianAnalysis/{method_type}/TR_{{trained_on_dataset_type}}/EV_{{evaluated_on_dataset_type}}/{dataset}_hessian_largest_eigenvalue_input.txt" for method_type in method_types for dataset in ["QCD", "Hbb"]],
+        *[f"{exp_path}/{{network_type}}/hessianAnalysis/{method_type}/TR_{{trained_on_dataset_type}}/EV_{{evaluated_on_dataset_type}}/{dataset}_hessian_largest_eigenvalue_weight.txt" for method_type in method_types for dataset in ["QCD", "Hbb"]],
+
+    wrapper:
+        "https://raw.githubusercontent.com/sambklein/hydra_snakmake/v0.0.3/"
+
+
 rule exportHessianLargestEigenvalue:
     output:
         *[f"{exp_path}/{{network_type}}/hessianAnalysis/{{method_type}}/TR_{{trained_on_dataset_type}}/EV_{{evaluated_on_dataset_type}}/{dataset}_hessian_largest_eigenvalue_input.txt" for dataset in ["QCD", "Hbb"]],
