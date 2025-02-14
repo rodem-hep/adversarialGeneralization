@@ -15,23 +15,23 @@ include: "train.smk"
 
 rule exportHessianLargestEigenvalue:
     output:
-        *[f"{exp_path}/{{network_type}}/methods/{{method_type}}/{{dataset_type}}/{dataset}_hessian_largest_eigenvalue_input.txt" for dataset in ["QCD", "Hbb"]],
-        *[f"{exp_path}/{{network_type}}/methods/{{method_type}}/{{dataset_type}}/{dataset}_hessian_largest_eigenvalue_weight.txt" for dataset in ["QCD", "Hbb"]],
+        *[f"{exp_path}/{{network_type}}/hessianAnalysis/{{method_type}}/TR_{{trained_on_dataset_type}}/EV_{{evaluated_on_dataset_type}}/{dataset}_hessian_largest_eigenvalue_input.txt" for dataset in ["QCD", "Hbb"]],
+        *[f"{exp_path}/{{network_type}}/hessianAnalysis/{{method_type}}/TR_{{trained_on_dataset_type}}/EV_{{evaluated_on_dataset_type}}/{dataset}_hessian_largest_eigenvalue_weight.txt" for dataset in ["QCD", "Hbb"]],
 
     params:
         "scripts/export_hessian.py",
-        "datamodule.data_conf.dataset_type={dataset_type}",
-        f"output_dir={exp_path}/{{network_type}}/methods/{{method_type}}/{{dataset_type}}",
-        f"tagger_name={{network_type}}_{{dataset_type}}_{{method_type}}",
-        f"tagger_path={exp_path}/taggers/supervised_{{dataset_type}}_{{method_type}}",
-
+        "datamodule.data_conf.dataset_type={evaluated_on_dataset_type}",
+        f"output_dir={exp_path}/{{network_type}}/hessianAnalysis/{{method_type}}/TR_{{trained_on_dataset_type}}/EV_{{evaluated_on_dataset_type}}",
+        f"tagger_name={{network_type}}_{{trained_on_dataset_type}}_{{method_type}}",
+        f"tagger_path={exp_path}/taggers/supervised_{{trained_on_dataset_type}}_{{method_type}}",
+        "evaluated_on_dataset_type={evaluated_on_dataset_type}",
+        "trained_on_dataset_type={trained_on_dataset_type}",
     resources:
-        runtime = 60,
+        runtime = 2*60,
 
     input:
-        f"{exp_path}/taggers/supervised_{{dataset_type}}_{{method_type}}/{{network_type}}_{{dataset_type}}_{{method_type}}/checkpoints/last.ckpt",
+        f"{exp_path}/taggers/supervised_{{trained_on_dataset_type}}_{{method_type}}/{{network_type}}_{{trained_on_dataset_type}}_{{method_type}}/checkpoints/last.ckpt",
 
     wrapper:
         "https://raw.githubusercontent.com/sambklein/hydra_snakmake/v0.0.3/"
 
-    

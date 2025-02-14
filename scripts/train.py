@@ -24,7 +24,6 @@ from mattstools.mattstools.hydra_utils import (
 from franckstools.franckstools.swag import SWAGWrapper
 from franckstools.franckstools.adversarial_attack import AdversarialWrapper
 from franckstools.franckstools.sam import SAMWrapper
-from franckstools.franckstools.invariantRiskMinimization import IRMWrapper
 
 log = logging.getLogger(__name__)
 
@@ -121,10 +120,6 @@ def main(cfg: DictConfig) -> None:
             )
             print(f"Transfering checkpoint from {transfer_ckpt_path}")
             model.transfer_checkpoint(transfer_ckpt_path)
-
-    if hasattr(cfg, "use_IRM_mass") and cfg.use_IRM_mass:
-        log.info("Instantiating IRM wrapper")
-        model = IRMWrapper(model, n_environments=cfg.n_environments)
 
     log.info(model)
 

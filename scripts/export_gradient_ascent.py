@@ -15,7 +15,6 @@ from mattstools.mattstools.hydra_utils import reload_original_config
 from franckstools.franckstools.swag import SWAGWrapper
 from franckstools.franckstools.sam import SAMWrapper
 from franckstools.franckstools.adversarial_attack import AdversarialWrapper
-from franckstools.franckstools.invariantRiskMinimization import IRMWrapper
 from franckstools.franckstools.loss_landscapes import gradient_ascent_weight_tracing
 from franckstools.franckstools.loss_landscapes import gradient_ascent_input_tracing
 
@@ -47,8 +46,6 @@ def main(cfg: DictConfig) -> None:
         wrapperList.append("Adversarial")
     if hasattr(orig_cfg, "use_SWAG") and orig_cfg.use_SWAG:
         wrapperList.append("SWAG")
-    if hasattr(orig_cfg, "use_IRM_mass") and orig_cfg.use_IRM_mass:
-        wrapperList.append("IRM_mass")
 
     if len(wrapperList) > 0:
         log.info("Instantiating the underlying base model")
@@ -90,14 +87,6 @@ def main(cfg: DictConfig) -> None:
                     epsilon=orig_cfg.epsilon,
                     PGD_num_steps=orig_cfg.PGD_num_steps,
                     PGD_step_size=orig_cfg.PGD_step_size,
-                )
-            elif wrapper == "IRM_mass":
-                model = IRMWrapper(
-                    model,
-                    n_environments=orig_cfg.n_environments,
-                    #    weight_decay = orig_cfg.weight_decay,
-                    #    penalty_weight = orig_cfg.penalty_weight,
-                    #    penalty_anneal_iters = orig_cfg.penalty_anneal_iters,
                 )
             else:
                 raise ValueError(f"Unknown wrapper {wrapper}")

@@ -63,10 +63,7 @@ rule all:
         
         # Reference comparison ROC plots
         *[f"{exp_path}/{network_type}/plots/reference_comparison/ROC_{evaluated_on_dataset_type}_signal_vs_background.png" for evaluated_on_dataset_type in evaluated_on_dataset_types for network_type in network_types],
-        *[f"{exp_path}/{network_type}/plots/reference_comparison/ROC_{evaluated_on_dataset_type}_signal_vs_background_decor.png" for evaluated_on_dataset_type in evaluated_on_dataset_types for network_type in network_types],
-
-        # ROC plots
-        *[f"{exp_path}/{network_type}/plots/methods/{method}/ROC_{evaluated_on_dataset_type}_signal_vs_background.png" for method in method_types for evaluated_on_dataset_type in evaluated_on_dataset_types for network_type in network_types],
+        *[f"{exp_path}/{network_type}/plots/reference_comparison/ROC_{evaluated_on_dataset_type}_signal_vs_background_decor.png" for evaluated_on_dataset_type in evaluated_on_dataset_types for network_type in network_types], # ROC plots *[f"{exp_path}/{network_type}/plots/methods/{method}/ROC_{evaluated_on_dataset_type}_signal_vs_background.png" for method in method_types for evaluated_on_dataset_type in evaluated_on_dataset_types for network_type in network_types],
         *[f"{exp_path}/{network_type}/plots/methods/{method}/ROC_{evaluated_on_dataset_type}_signal_vs_background_decor.png" for method in method_types for evaluated_on_dataset_type in evaluated_on_dataset_types for network_type in network_types],
 
         # Mass sculpting 
@@ -80,25 +77,26 @@ rule all:
 
 
         # Gradient ascent plots
-        *[f"{exp_path}/{network_type}/plots/methods/{method}/gradientAscentWeight_TR_{trained_on_dataset_type}_EV_{evaluated_on_dataset_type}.pdf" for method in method_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types if evaluated_on_dataset_type==trained_on_dataset_type for network_type in network_types ], # Only plot the diagonal for now
-        *[f"{exp_path}/{network_type}/plots/methods/{method}/gradientAscentInput_TR_{trained_on_dataset_type}_EV_{evaluated_on_dataset_type}.pdf" for method in method_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types if evaluated_on_dataset_type==trained_on_dataset_type for network_type in network_types ], # Only plot the diagonal for now
+        *[f"{exp_path}/{network_type}/plots/gradientAscentWeight_TR_{trained_on_dataset_type}_EV_{evaluated_on_dataset_type}.pdf" for network_type in network_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types],
+        *[f"{exp_path}/{network_type}/plots/gradientAscentInput_TR_{trained_on_dataset_type}_EV_{evaluated_on_dataset_type}.pdf" for network_type in network_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types],
 
-        *[f"{exp_path}/{network_type}/plots/gradientAscentWeight_TR_{dataset_type}_EV_{dataset_type}.pdf" for network_type in network_types for dataset_type in trained_on_dataset_types],
-        *[f"{exp_path}/{network_type}/plots/gradientAscentInput_TR_{dataset_type}_EV_{dataset_type}.pdf" for network_type in network_types for dataset_type in trained_on_dataset_types],
+        # Individual plots
+        # *[f"{exp_path}/{network_type}/plots/methods/{method}/gradientAscentWeight_TR_{trained_on_dataset_type}_EV_{evaluated_on_dataset_type}.pdf" for method in method_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types for network_type in network_types ], 
+        # *[f"{exp_path}/{network_type}/plots/methods/{method}/gradientAscentInput_TR_{trained_on_dataset_type}_EV_{evaluated_on_dataset_type}.pdf" for method in method_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types for network_type in network_types ],
 
         # Average loss landscape plots
         *[f"{exp_path}/{network_type}/plots/avgLossLandscape_TR_{trained_on_dataset_type}_EV_{evaluated_on_dataset_type}.pdf" for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types if evaluated_on_dataset_type==trained_on_dataset_type for network_type in network_types], # Only plot the diagonal for now
 
         # Hessian analysis
-        *[f"{exp_path}/{network_type}/methods/{method_type}/{dataset_type}/{dataset}_hessian_largest_eigenvalue_input.txt" for network_type in network_types for method_type in method_types for dataset_type in trained_on_dataset_types for dataset in ["QCD", "Hbb"]],
-        *[f"{exp_path}/{network_type}/methods/{method_type}/{dataset_type}/{dataset}_hessian_largest_eigenvalue_weight.txt" for network_type in network_types for method_type in method_types for dataset_type in trained_on_dataset_types for dataset in ["QCD", "Hbb"]],
+        # *[f"{exp_path}/{network_type}/hessianAnalysis/{method_type}/TR_{trained_on_dataset_type}/EV_{evaluated_on_dataset_type}/{dataset}_hessian_largest_eigenvalue_input.txt" for network_type in network_types for method_type in method_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types for dataset in ["QCD", "Hbb"]],
+        # *[f"{exp_path}/{network_type}/hessianAnalysis/{method_type}/TR_{trained_on_dataset_type}/EV_{evaluated_on_dataset_type}/{dataset}_hessian_largest_eigenvalue_weight.txt" for network_type in network_types for method_type in method_types for trained_on_dataset_type in trained_on_dataset_types for evaluated_on_dataset_type in evaluated_on_dataset_types for dataset in ["QCD", "Hbb"]],
 
-        # Reference scores summary table
-        *[f"{exp_path}/{network_type}/scores_array/reference_rejection_heatmap.png" for network_type in network_types],
-        *[f"{exp_path}/{network_type}/scores_array/reference_rejection_heatmap_decor.png" for network_type in network_types], 
-        # Scores summary table
-        *[f"{exp_path}/{network_type}/scores_array/rejection_heatmap_{trained_on_dataset_type}_M_{method_file_name}.png" for trained_on_dataset_type in trained_on_dataset_types for network_type in network_types for method_file_name in method_file_names],
-        *[f"{exp_path}/{network_type}/scores_array/rejection_heatmap_{trained_on_dataset_type}_M_{method_file_name}_decor.png" for trained_on_dataset_type in trained_on_dataset_types for network_type in network_types for method_file_name in method_file_names],
+        # # Reference scores summary table
+        # *[f"{exp_path}/{network_type}/scores_array/reference_rejection_heatmap.png" for network_type in network_types],
+        # *[f"{exp_path}/{network_type}/scores_array/reference_rejection_heatmap_decor.png" for network_type in network_types], 
+        # # Scores summary table
+        # *[f"{exp_path}/{network_type}/scores_array/rejection_heatmap_{trained_on_dataset_type}_M_{method_file_name}.png" for trained_on_dataset_type in trained_on_dataset_types for network_type in network_types for method_file_name in method_file_names],
+        # *[f"{exp_path}/{network_type}/scores_array/rejection_heatmap_{trained_on_dataset_type}_M_{method_file_name}_decor.png" for trained_on_dataset_type in trained_on_dataset_types for network_type in network_types for method_file_name in method_file_names],
 
         # Split Datasets in Train and Test
         # *[f"/srv/beegfs/scratch/groups/rodem/datasets/RS3L/FR_RS3L_{class_name}_{dset}.h5" for class_name in ["QCD", "Hbb"] for dset in ["train", "test"]],
