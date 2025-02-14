@@ -38,23 +38,37 @@ def main(cfg: DictConfig) -> None:
     # Generate LaTeX table
     latex_table = r"""
 \begin{table}[h]
-    \centering
-    \caption{Largest Hessian eigenvalues for the different training methods and perturbation spaces \textcolor{darkgreen}{for models trained and evaluated on Pythia}. Lower values correlate with wider minimas.} 
-    \label{tab:HessianEigenvalues}
-    \resizebox{\linewidth}{!}{
-        \begin{tabular}{lcccc}
-            \toprule
-            \textbf{Methods} & \multicolumn{2}{c}{\textbf{Feature-space}} & \multicolumn{2}{c}{\textbf{Weight-space}} \\
-                             & \textbf{Hbb} & \textbf{QCD} & \textbf{Hbb} & \textbf{QCD} \\
-            \midrule
-    """
+  \centering
+  \caption{Largest Hessian eigenvalues for the different training methods and perturbation spaces \textcolor{darkgreen}{for models trained and evaluated on Pythia}. Lower values correlate with wider minimas.} 
+  \label{tab:HessianEigenvalues}
+  \resizebox{\linewidth}{!}{
+      \begin{tabular}{lcccc}
+          \toprule
+          \textbf{Methods} & \multicolumn{2}{c}{\textbf{Feature-space}} & \multicolumn{2}{c}{\textbf{Weight-space}} \\
+                            & \textbf{Hbb} & \textbf{QCD} & \textbf{Hbb} & \textbf{QCD} \\
+          \midrule
+"""
+
+    # Find the smallest values
+    min_values = {
+        space: {key: float("inf") for key in ["Hbb", "QCD"]}
+        for space in ["input", "weight"]
+    }
+    for spaces in eigenvalues.values():
+        for space in ["input", "weight"]:
+            for key, val in spaces[space].items():
+                if val[0] < min_values[space][key]:
+                    min_values[space][key] = val[0]
+
     for method, spaces in eigenvalues.items():
         latex_table += f"            \\textbf{{{method}}} & "
         latex_table += " & ".join(
             [
-                f"${val[0]} \\pm {val[1]}$"
+                f"$\\mathbf{{{val[0]}}} \\pm \\mathbf{{{val[1]}}}$"
+                if val[0] == min_values[space][key]
+                else f"${val[0]} \\pm {val[1]}$"
                 for space in ["input", "weight"]
-                for val in spaces[space].values()
+                for key, val in spaces[space].items()
             ]
         )
         latex_table += r" \\" + "\n"
@@ -64,7 +78,7 @@ def main(cfg: DictConfig) -> None:
         \end{tabular}
     }
 \end{table}
-    """
+"""
 
     output_dir = Path(cfg.output_dir)
     if not output_dir.exists():
